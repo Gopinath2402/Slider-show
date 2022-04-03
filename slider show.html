@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        
+        body {
+            height: 100vh;
+            width: 100%;
+        }
+        
+        .main {
+            width: 50%;
+            transform: translate(50%);
+        }
+        
+        .slider {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+        
+        .img1 {
+            width: 100%;
+            height: 400px;
+            border-radius: 15px;
+            padding: 5px;
+        }
+        
+        .img1-1,
+        .img2-1,
+        .img3-1 {
+            border-radius: 50%;
+            height: 110px;
+            width: 110px;
+            padding: 20px;
+        }
+        
+        .bottom {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 60px;
+        }
+        
+        .fa-play-circle,
+        .fa-stop-circle {
+            font-size: 25px;
+        }
+        
+        .buttons {
+            position: absolute;
+            left: 42%;
+        }
+        
+        .btn,
+        .btn1 {
+            cursor: pointer;
+            padding: 20px;
+        }
+        
+        .fa-stop-circle:hover {
+            color: orange;
+        }
+        
+        .fa-play-circle:hover {
+            color: orange;
+        }
+        
+        .top-right:hover {
+            color: orange;
+        }
+        
+        .top-left:hover {
+            color: orange;
+        }
+        
+        p {
+            border: 1px solid;
+            padding: 3px;
+            height: fit-content;
+            cursor: pointer;
+        }
+        
+        .top-right {
+            position: relative;
+            left: 490px;
+        }
+        
+        .top-left {
+            position: relative;
+            left: 50px;
+        }
+        
+        .img2-1 {
+            transform: scale(1.4);
+        }
+        
+        .img1-1 {
+            transform: scale(1);
+        }
+        
+        .img3-1 {
+            transform: scale(1);
+        }
+        
+        .scale {
+            animation: scale 2s infinite linear;
+        }
+        
+        @keyframes scale {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div id="slider">
+            <img id="slidimg" src="https://wallpaperaccess.com/full/1781736.jpg" class="img1">
+            <img id="slidimg" src="https://wallpaperaccess.com/full/1447719.jpg" class="img1">
+            <img id="slidimg" src="https://c4.wallpaperflare.com/wallpaper/591/844/1024/spider-man-spider-video-games-superhero-wallpaper-preview.jpg" class="img1">
+        </div>
+    </div>
+    <br>
+    <div class="buttons">
+        <span class="btn"><i class="fas fa-play-circle"></i> Play</span>
+        <span class="btn1"><i class="far fa-stop-circle"></i> stop</span>
+    </div>
+    <div class="bottom">
+        <P id="prev" onclick="nextSlide(-1)" class="top-left"><i class="fas fa-angle-left"></i>Prev</P>
+        <p id="next" onclick="nextSlide(1)" class="top-right">Next<i class="fas fa-angle-right"></i></p>
+        <div id="slid-bottom">
+            <img id="bottomimg" src="https://wallpaperaccess.com/full/1781736.jpg" class="img1-1">
+            <img id="bottomimg" src="https://wallpaperaccess.com/full/1447719.jpg" class="img2-1">
+            <img id="bottomimg" src="https://c4.wallpaperflare.com/wallpaper/591/844/1024/spider-man-spider-video-games-superhero-wallpaper-preview.jpg" class="img3-1">
+        </div>
+    </div>
+    <script>
+        var slideIndex = 1;
+        displaySlides(slideIndex);
+
+        function nextSlide(n) {
+            displaySlides(slideIndex += n);
+        }
+
+        function bottomSlid(n) {
+            displaySlides(slideIndex = n);
+        }
+
+        function displaySlides(n) {
+            var i;
+            let sliderImg = document.querySelectorAll("#slidimg"),
+                bottomSlid = document.querySelectorAll("#bottomimg");
+            if (n > sliderImg.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = sliderImg.length
+            }
+            for (i = 0; i < sliderImg.length; i++) {
+                sliderImg[i].style.display = "none";
+            }
+            for (let i = 0; i < bottomSlid.length; i++) {
+                bottomSlid[i].style.transform = "scale(1)"
+
+            }
+            sliderImg[slideIndex - 1].style.display = "block";
+            bottomSlid[slideIndex - 1].style.transform = "scale(1.4)"
+
+        }
+        let ani = document.querySelector('#slidimg');
+        let play = document.querySelector(".btn");
+        let pause = document.querySelector(".btn1");
+
+        play.addEventListener("click", function() {
+            if (ani.classList != "scale") {
+                ani.classList.add('scale');
+            }
+        })
+        pause.addEventListener("click", function() {
+            ani.classList.remove('scale');
+
+        })
+    </script>
+    </div>
+</body>
+
+</html>
